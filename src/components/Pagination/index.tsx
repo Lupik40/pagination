@@ -3,7 +3,7 @@ import useOnScreen from "../../hooks/useOnScreen";
 import debounce from "../../services/debounce";
 
 interface IPaginationParams {
-  children: any;
+  children: JSX.Element;
   onNext: Function;
   className: string;
 }
@@ -14,9 +14,7 @@ const Pagination: React.FC<IPaginationParams> = ({
   className,
 }) => {
   const ancorRef = useRef<any>();
-
   const debounceOnNext = debounce(onNext, 250);
-
   useOnScreen(ancorRef, debounceOnNext, "100px");
 
   return (

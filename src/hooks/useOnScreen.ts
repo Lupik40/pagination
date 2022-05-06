@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function useOnScreen(
   ref: any,
@@ -7,8 +7,10 @@ export default function useOnScreen(
 ): void {
   useEffect(() => {
     const observer = new IntersectionObserver(
-      () => {
-        fn();
+      ([{ isIntersecting }]) => {
+        if (isIntersecting) {
+          fn();
+        }
       },
       { rootMargin }
     );
@@ -18,5 +20,5 @@ export default function useOnScreen(
     return () => {
       observer.unobserve(ref.current);
     };
-  }, []);
+  }, [fn]);
 }

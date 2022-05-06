@@ -1,5 +1,6 @@
 import React from "react";
 import IPost from "../../types/IPost";
+import "./styles.scss";
 
 interface IPostItemParams {
   item: IPost;
@@ -7,7 +8,7 @@ interface IPostItemParams {
 
 const PostItem: React.FC<IPostItemParams> = ({ item }) => {
   return (
-    <li>
+    <li className="item">
       <h2>{item.title}</h2>
       <p>{item.body}</p>
     </li>

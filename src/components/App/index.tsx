@@ -1,12 +1,10 @@
 import React from "react";
-import AppContent from "../AppContent/index";
+import AppContent from "../AppContent/";
 
-const App = () => {
-  return (
-    <div className="App">
-      <AppContent />
-    </div>
-  );
-};
+const App = () => (
+  <div className="App">
+    <AppContent />
+  </div>
+);
 
 export default App;

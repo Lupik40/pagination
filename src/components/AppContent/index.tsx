@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from "react";
 import getPosts from "../../services/getPosts";
-import Loader from "../Loader";
+import IPost from "../../types/IPost";
 import Pagination from "../Pagination";
 import PostsList from "../PostsList";
-import IPost from "../../types/IPost";
+import Loader from "../Loader";
 
 const AppContent = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [loadPosts, setLoadPosts] = useState(true);
+  const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    getPosts()
-      .then((response) => {
-        setPosts([...posts, ...response.data]);
-      })
-      .finally(() => setLoadPosts(false));
-  }, [loadPosts]);
-
-  const onNext = () => {
-    setLoadPosts(true);
+  const uploadPosts = async () => {
+    const response = await getPosts(page + 1);
+    setPosts([...posts, ...response.data]);
+    setPage((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    uploadPosts();
+  }, []);
+
   return (
-    <h1>
+    <div>
       {posts.length > 0 ? (
-        <Pagination onNext={onNext} className={"posts"}>
+        <Pagination onNext={uploadPosts} className={"posts"}>
           <PostsList list={posts} />
         </Pagination>
       ) : (
         <Loader />
       )}
-    </h1>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
-import PostItem from "../PostItem";
 import IPost from "../../types/IPost";
+import PostItem from "../PostItem";
+import "./styles.scss";
 
 interface IPostsListParams {
   list: IPost[];
@@ -8,7 +9,7 @@ interface IPostsListParams {
 
 const PostsList: React.FC<IPostsListParams> = ({ list }) => {
   return (
-    <ul>
+    <ul className="list">
       {list.map((item) => (
         <PostItem item={item} key={Math.random()} />
       ))}
